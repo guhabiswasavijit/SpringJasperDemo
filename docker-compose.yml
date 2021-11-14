@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+    db:
+      image: mysql:latest
+      environment:
+        - MYSQL_ROOT_PASSWORD=Swam2@mysql
+      container_name: mysql-db2
+      ports:
+        - "3306:3306"
+      restart: always
+      networks:
+      - ex-bridge
+      volumes: 
+        - C:\MySql\data:/data
+    #service 3: definition of your spring-boot app 
+    reportservice:                        #it is just a name, which will be used only in this file.
+      image: spring-boot-jasper:0.1       #name of the image after dockerfile executes
+      container_name: spring-boot-jasper  #name of the container created from docker image
+      ports:
+        - "9191:9191"                       #docker containter port with your os port
+      restart: always
+      networks:
+      - ex-bridge
+        
+      depends_on:                           #define dependencies of this app
+        - db                                #dependency name (which is defined with this name 'db' in this file earlier)
+      environment:
+          - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db2:3306/jr_repo_db?useSSL=false
+          - SPRING_DATASOURCE_USERNAME=root
+          - SPRING_DATASOURCE_PASSWORD=Swam2@mysql
+          - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+        
+networks:
+  ex-bridge:
+    driver: bridge
+
