@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdersReport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="30" bottomMargin="30" uuid="58b0013c-1812-4619-b65d-51adcecc34fb">
+	<style name="Sans_Normal" isDefault="true" fontName="DejaVu Sans" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Bold" fontName="DejaVu Sans" fontSize="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="SumSalaryStyle" style="Sans_Normal">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{SumSalary} > 5000]]></conditionExpression>
+			<style forecolor="#d45087" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="CellStyle" mode="Opaque">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{ROW_COUNT} % 2 == 0]]></conditionExpression>
+			<style backcolor="#E0E0E0"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[select DEPARTMENT_ID as departmentId,SUM(SALARY) as salary from employee group by DEPARTMENT_ID]]>
+	</queryString>
+	<field name="departmentId" class="java.lang.Integer"/>
+	<field name="salary" class="java.lang.Integer"/>
+	<title>
+		<band height="35">
+			<staticText>
+				<reportElement style="Sans_Bold" x="0" y="0" width="782" height="35" uuid="0ff7d2dc-699e-403a-844d-b36186325f6c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Department wise salary information.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="60">
+			<crosstab isRepeatColumnHeaders="false">
+			    	<variable name="v_salary" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$F{salary}]]></variableExpression>
+	</variable>
+	<variable name="v_departmentId" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$F{departmentId}]]></variableExpression>
+	</variable>
+				<reportElement x="0" y="0" width="782" height="60" uuid="48397e05-ca8f-48bb-89a3-7b43b9fdbb07"/>
+				<rowGroup name="DepartmentRow" width="80" totalPosition="End">
+					<bucket order="Descending" class="java.lang.String">
+						<bucketExpression><![CDATA[$V{v_departmentId}]]></bucketExpression>
+						<orderByExpression><![CDATA[$V{v_salary}]]></orderByExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents style="CellStyle">
+							<box>
+								<pen lineWidth="1.0" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Sans_Bold" x="5" y="0" width="75" height="20" uuid="1584c0b1-72d2-443d-b9f9-9d4cf4dbecee"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$V{DepartmentRow}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<box>
+								<pen lineWidth="1.0" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement style="Sans_Bold" x="5" y="0" width="75" height="20" uuid="985d476c-2329-4501-92f4-3c5017ef4478"/>
+								<textElement verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="SalaryColumn" height="20" totalPosition="End">
+					<bucket class="java.lang.Integer">
+						<bucketExpression><![CDATA[$V{v_salary}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<box>
+								<pen lineWidth="1.0" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Sans_Bold" x="0" y="0" width="60" height="20" uuid="33e348e9-2122-4f75-9435-dd43bc46c2c4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[($V{SalaryColumn}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents>
+							<box>
+								<pen lineWidth="1.0" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement style="Sans_Bold" x="0" y="0" width="60" height="20" uuid="1b3d2f3f-40c6-4b56-8e8d-b162ed55da7c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="SumSalary" class="java.lang.Integer" calculation="Count">
+					<measureExpression><![CDATA[$V{v_salary}]]></measureExpression>
+				</measure>
+				<crosstabCell width="60" height="20">
+					<cellContents mode="Transparent" style="CellStyle">
+						<box>
+							<pen lineColor="#000000"/>
+							<bottomPen lineWidth="1"/>
+							<rightPen lineWidth="1"/>
+						</box>
+						<textField>
+							<reportElement style="SumSalaryStyle" mode="Opaque" x="0" y="0" width="60" height="10" uuid="7a6d4e33-8395-467d-8f6e-bef91a959af5"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$V{SumSalary}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

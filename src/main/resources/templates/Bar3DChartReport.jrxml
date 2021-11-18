@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bar3DChartReport" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="270" columnSpacing="15" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="090c22e4-1924-482c-8c1d-b4460e68d01f">
+	<style name="Sans_Normal" isDefault="true" fontName="JasperReports Icons" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Bold" fontName="JasperReports Icons" fontSize="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Italic" fontName="JasperReports Icons" fontSize="8" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Serif_Normal" fontName="JasperReports Icons" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Serif_Bold" fontName="JasperReports Icons" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select DEPARTMENT_ID as departmentId,SUM(SALARY) as salary from employee group by DEPARTMENT_ID]]>
+	</queryString>
+	<field name="departmentId" class="java.lang.Integer"/>
+	<field name="salary" class="java.lang.Integer"/>
+	<group name="ChartGroup" isStartNewColumn="true" minHeightToStartNewPage="200">
+		<groupExpression><![CDATA[$F{departmentId}]]></groupExpression>
+		<groupHeader>
+			<band height="250">
+				<rectangle>
+					<reportElement x="0" y="14" width="270" height="11" forecolor="#FFDDDD" backcolor="#FFDDDD" uuid="2e89518c-5cef-416a-a8ce-0d9cf2c61053"/>
+				</rectangle>
+				<staticText>
+					<reportElement style="Sans_Italic" mode="Opaque" x="0" y="14" width="130" height="11" forecolor="#FF0000" backcolor="#FFDDDD" uuid="1a7c2ab5-5f82-47fe-be7e-18458ce173f5"/>
+					<textElement>
+						<font isUnderline="true"/>
+					</textElement>
+					<text><![CDATA["DepartMent_"+$F{departmentId}]]></text>
+				</staticText>				
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25">
+				<line>
+					<reportElement x="0" y="0" width="270" height="1" forecolor="#FF0000" uuid="621a4611-7288-4ebb-a2e6-358b701b5801"/>
+				</line>
+				<staticText>
+					<reportElement style="Sans_Bold" x="0" y="1" width="45" height="11" forecolor="#FF0000" uuid="290b6b6f-926d-4746-be7f-ab25cc363f46"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Total :]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Sans_Bold" x="45" y="1" width="25" height="11" forecolor="#FF0000" uuid="8703522b-26f2-472f-936f-f8e1212a9f3f"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Sum salary:"+$F{salary}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	 <summary>
+        <band height="267">
+            <bar3DChart>
+                <chart>
+                    <reportElement x="90" y="10" width="581" height="257" uuid="bcbac117-a9ab-424c-ae81-6f68d1b01f0c"/>
+                    <chartTitle/>
+                    <chartSubtitle/>
+                    <chartLegend/>
+                </chart>
+                <categoryDataset>
+                    <dataset incrementType="None"/>
+                    <categorySeries>
+                        <seriesExpression><![CDATA["Department wise sum salary"]]></seriesExpression>
+                        <categoryExpression><![CDATA[$F{departmentId}]]></categoryExpression>
+                        <valueExpression><![CDATA[$F{salary}]]></valueExpression>
+                    </categorySeries>
+                </categoryDataset>
+                <bar3DPlot>
+                    <plot/>
+                    <itemLabel/>
+                    <categoryAxisFormat>
+                        <axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+                    </categoryAxisFormat>
+                    <valueAxisFormat>
+                        <axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+                    </valueAxisFormat>
+                </bar3DPlot>
+            </bar3DChart>
+        </band>
+    </summary>
+</jasperReport>
