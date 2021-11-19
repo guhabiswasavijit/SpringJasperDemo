@@ -47,7 +47,7 @@ public class JasperChartDemo {
 		try 
 		{
 			log.debug("About to generate CrossTabChartDemo:");
-			InputStream employeeReportStream = this.getClass().getResourceAsStream("/templates/DepartmentSumSalary3DBarChart.jrxml");
+			InputStream employeeReportStream = this.getClass().getResourceAsStream("/templates/DemoCrossTab.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(employeeReportStream);		
 			Map<String, Object> parameters = new HashMap<>();			
 			parameters.put("createdBy",System.getProperty("user.name"));			
