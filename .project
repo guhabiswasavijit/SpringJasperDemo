@@ -13,9 +13,13 @@
     <buildCommand>
       <name>org.springframework.ide.eclipse.boot.validation.springbootbuilder</name>
     </buildCommand>
+    <buildCommand>
+      <name>org.eclipse.babel.editor.rbeBuilder</name>
+    </buildCommand>
   </buildSpec>
   <natures>
     <nature>org.eclipse.jdt.core.javanature</nature>
     <nature>org.eclipse.m2e.core.maven2Nature</nature>
+    <nature>com.jaspersoft.studio.babel.editor.rbeNature</nature>
   </natures>
 </projectDescription>

@@ -17,6 +17,12 @@
 	</properties>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>${jasper.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -97,7 +103,7 @@
 			<artifactId>batik-transcoder</artifactId>
 			<version>1.14</version>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
@@ -153,27 +159,12 @@
 					</execution>
 				</executions>
 			</plugin>
-<!-- 			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>${dockerfile-maven-version}</version>
-				<executions>
-					<execution>
-						<id>default</id>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<repository>${env.IMAGE_NAME}</repository>
-					<tag>${env.IMAGE_TAG}</tag>
-					<buildArgs>
-						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-					</buildArgs>
-				</configuration>
-			</plugin> -->
+			<!-- <plugin> <groupId>com.spotify</groupId> <artifactId>dockerfile-maven-plugin</artifactId> 
+				<version>${dockerfile-maven-version}</version> <executions> <execution> <id>default</id> 
+				<goals> <goal>build</goal> <goal>push</goal> </goals> </execution> </executions> 
+				<configuration> <repository>${env.IMAGE_NAME}</repository> <tag>${env.IMAGE_TAG}</tag> 
+				<buildArgs> <JAR_FILE>${project.build.finalName}.jar</JAR_FILE> </buildArgs> 
+				</configuration> </plugin> -->
 		</plugins>
 	</build>
 
