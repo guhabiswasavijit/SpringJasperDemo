@@ -13,7 +13,8 @@ public class SpringBootJasperReportApplication {
 	public static void main(String[] args){
 		ConfigurableApplicationContext ctx = SpringApplication.run(SpringBootJasperReportApplication.class, args);
 		JasperChartDemo demo = (JasperChartDemo)ctx.getBean("JasperChartDemo");
-		demo.generateCrossTabChartDemo();
+		demo.generate3DStackedBarChartDemo();
+		//demo.generateCrossTabChartDemo();
 		//demo.generateChartDemo();
 		//demo.generateCrossTabChartDemo();
 		//demo.generate3DBarChartDemo();

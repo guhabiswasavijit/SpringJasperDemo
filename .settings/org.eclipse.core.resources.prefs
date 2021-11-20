@@ -4,5 +4,6 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/resources/templates/Bar3DChartReport.jrxml=UTF-8
 encoding//src/main/resources/templates/DemoCrossTab.jrxml=UTF-8
 encoding//src/main/resources/templates/Pie3DChartReport.jrxml=UTF-8
+encoding//src/main/resources/templates/StackedBar3DChartReport.jrxml=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

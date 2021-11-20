@@ -98,5 +98,24 @@ public class JasperChartDemo {
 			log.error("JRException : ", e.getMessage(), e.getCause());
 		}
 	}
+	public void generate3DStackedBarChartDemo() {
+		try 
+		{
+			log.debug("About to generate 3DPieChart:");
+			InputStream employeeReportStream = this.getClass().getResourceAsStream("/templates/StackedBar3DChartReport.jrxml");
+			JasperReport jasperReport = JasperCompileManager.compileReport(employeeReportStream);		
+			Map<String, Object> parameters = new HashMap<>();			
+			parameters.put("ReportTitle","3D Stacked Bar Chart");
+			parameters.put("MaxOrderID",10250);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mySqlConn);
+			JasperExportManager.exportReportToPdfFile(jasperPrint, jrRepoPath + "order3DStackedBarChart.pdf");
+
+		} 
+		catch (JRException e) 
+		{
+			e.printStackTrace();
+			log.error("JRException : ", e.getMessage(), e.getCause());
+		}
+	}
 
 }
